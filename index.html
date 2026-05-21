@@ -146,6 +146,11 @@
                 <li><a href="#offset-cylinder">11. Cylinder</a></li>
                 <li><a href="#offset-axis">12. Axis</a></li>
                 <li><a href="#offset-robot">13. Robot</a></li>
+                <li><a href="#offset-notifications">14. Notifications</a></li>
+                <li><a href="#offset-marker">15. Marker</a></li>
+                <li><a href="#offset-conveyor">16. Conveyor</a></li>
+                <li><a href="#offset-AutoCycle">17. AutoCycle</a></li>
+                <li><a href="#offset-Holders">18. Holders</a></li>
             </ul>
         </ul>
     </nav>
@@ -238,6 +243,7 @@
                 <tr><td>Station</td><td>121</td><td>Station parameters</td></tr>
                 <tr><td>Gripper</td><td>122</td><td>Gripper-related parameters</td></tr>
                 <tr><td>Cylinder</td><td>123</td><td>Cylinder actuator parameters</td></tr>
+                <tr><td>Holders</td><td>124</td><td>Holder actuator parameters</td></tr>
                 <tr><td>Emergency</td><td>150</td><td>Emergency/safety-related parameters</td></tr>
                 <tr><td>Tank</td><td>151</td><td>Tank-level parameters (levels, sensors, etc.)</td></tr>
                 <tr><td>Pressure</td><td>152</td><td>Pressure sensor or pressure system parameters</td></tr>
@@ -247,6 +253,7 @@
                 <tr><td>CenterStation</td><td>201</td><td>Centering station parameters</td></tr>
                 <tr><td>Conveyor</td><td>202</td><td>Conveyor parameters</td></tr>
                 <tr><td>Laser Mark Station</td><td>203</td><td>Laser marker parameters</td></tr>
+                <tr><td>AutoCycle</td><td>252</td><td>AutoCycle parameters</td></tr>
                 <tr><td>Notification</td><td>253</td><td>Notification from the device</td></tr>
                 <tr><td>Project</td><td>254</td><td>Project-level metadata and configuration</td></tr>
             </tbody>
@@ -274,6 +281,7 @@
                 <tr><td>NoofNotifications</td><td>14</td><td>No of current notifications in the machine</td></tr>
                 <tr><td>NewNotificationActive</td><td>15</td><td>New notification present after last read</td></tr>
                 <tr><td>plcToPcWatchdog</td><td>16</td><td>Variable holds plc to pc heartbeat</td></tr>
+                <tr><td>Immersion gantry free to operate</td><td>17</td><td>Whether immersion gantry is free of robot or other loading gantry presence</td></tr>
             </tbody>
         </table>
         <p><em>Note: <code>PcToPLCWatchdog</code> is deployed on the PLC to echo the matching signal received in the <code>plcToPcWatchdog</code> variable.</em></p>
@@ -485,6 +493,92 @@
         <tr><td>Robot Joint4 pos</td><td>13</td><td></td></tr>
         <tr><td>Robot Joint5 pos</td><td>14</td><td></td></tr>
         <tr><td>Robot Joint6 pos</td><td>15</td><td></td></tr>
+    </tbody>
+        </table>
+
+    <h3 id="offset-notifications">12. Notification Offset Address Map (Resource ID: 253)</h3>
+        
+       <table>
+            <thead><tr><th>Offset Name</th><th>Value</th><th>Description</th></tr></thead>
+              <tbody>
+        <tr><td>Notification id/Resource</td><td>1</td><td></td></tr>
+        <tr><td>Identification number</td><td>2</td><td></td></tr>
+        <tr><td>Notification severity</td><td>3</td><td></td></tr>
+        <tr><td>Timestamp</td><td>4</td><td></td></tr>
+        <tr><td>Message</td><td></td><td></td></tr>
+    </tbody>
+        </table>
+
+    <h3 id="offset-marker">12. Marker Offset Address Map (Resource ID: 253)</h3>
+
+       <table>
+            <thead><tr><th>Offset Name</th><th>Value</th><th>Description</th></tr></thead>
+              <tbody>
+       <tr><td>Type</td><td>1</td><td>Marker type – Laser/Dotpeen</td></tr>
+        <tr><td>Marking status</td><td>2</td><td>Status of operation</td></tr>
+        <tr><td>Error</td><td>3</td><td>Error status</td></tr>
+    </tbody>
+        </table>
+
+    <h3 id="offset-conveyor">14. Conveyor Offset Address Map (Resource ID: 202)</h3>
+
+       <table>
+            <thead><tr><th>Offset Name</th><th>Value</th><th>Description</th></tr></thead>
+              <tbody>
+        <tr><td>Conveyor type</td><td>1</td><td></td></tr>
+        <tr><td>Conveyor status</td><td>2</td><td>Conveyor at home position</td></tr>
+        <tr><td>Conveyor error code</td><td>3</td><td>Conveyor error code</td></tr>
+        <tr><td>Conveyor drive error code</td><td>3</td><td>Conveyor drive errorCode1</td></tr>
+        <tr><td>Conveyor drive error code</td><td>4</td><td>Conveyor drive errorCode2</td></tr>
+    </tbody>
+
+    <table>
+            <thead><tr><th>Bit position</th><th>Description</th></tr></thead>
+              <tbody>
+        <tr><td>0<td>Is conveyor moving</td></tr>
+        <tr><td>1<td>Is conveyor ready(No error)</td></tr>
+        <tr><td>2<td>Is forward limit On</td></tr>
+        <tr><td>3<td>Is reverse limit On</td></tr>
+        <tr><td>4<td>Is homed</td></tr>
+        <tr><td>5<td>Is movable from PC</td></tr>
+        <tr><td>6<td>Is stop/emergency On</td></tr>
+        <tr><td>7<td>Is at index position</td></tr>
+        <tr><td>8<td>Is ready for pickup</td></tr>
+        <tr><td>9<td>Is ready for drop</td></tr>
+        <tr><td>10<td>reserved</td></tr>
+        <tr><td>11<td>Is conveyor full</td></tr>
+        <tr><td>12<td>Is conveyor empty</td></tr>
+         <tr><td>13<td>Is conveyor access available for PC</td></tr>
+ 
+    </tbody>
+        </table>
+
+        <h3 id="offset-AutoCycle">15. AutoCycle Offset Address Map (Resource ID: 252)</h3>
+
+       <table>
+            <thead><tr><th>Offset Name</th><th>Value</th><th>Description</th></tr></thead>
+              <tbody>
+        <tr><td>IsAutocycleRunning</td><td>1</td><td>Is AutoCycle running</td></tr>
+        <tr><td>AutoCycleStep</td><td>2</td><td>Current step of the AutoCycle</td></tr>
+        <tr><td>AutoCycleStatus</td><td>3</td><td>Current status of the AutoCycle</td></tr>
+        <tr><td>AutoCycleHandlingCompId</td><td>4</td><td>Current handling component ID of the AutoCycle</td></tr>
+        
+         <tr><td>AutoCycleErrorCode</td><td>5</td><td>AutoCycle error code</td></tr>
+
+    </tbody>
+        </table>
+
+    <h3 id="offset-Holders">16. Holders Offset Address Map (Resource ID: 124)</h3>
+
+       <table>
+            <thead><tr><th>Offset Name</th><th>Value</th><th>Description</th></tr></thead>
+              <tbody>
+        <tr><td>holderId</td><td>1</td><td>Holder identification id</td></tr>
+        <tr><td>IsEngaged</td><td>2</td><td>Whether the holder is engaged holding the sample</td></tr>
+        <tr><td>IsDisengaged</td><td>3</td><td>Whether the holder is disengaged from holding the sample</td></tr>
+        <tr><td>holderPosition</td><td>4</td><td>Current position of the holder</td></tr>
+
+
     </tbody>
         </table>
     </main>
