@@ -145,6 +145,7 @@
                 <li><a href="#offset-flow">10. Flow</a></li>
                 <li><a href="#offset-cylinder">11. Cylinder</a></li>
                 <li><a href="#offset-axis">12. Axis</a></li>
+                <li><a href="#offset-robot">13. Robot</a></li>
             </ul>
         </ul>
     </nav>
@@ -416,11 +417,75 @@
 
         <h3 id="offset-axis">12. Axis Offset Address Map (Resource ID: 100)</h3>
         <p><em>Note: The user specification for the Axis offset variables was cut off in the raw file. Please append details to this section as needed.</em></p>
-        <table>
+       <table>
             <thead><tr><th>Offset Name</th><th>Value</th><th>Description</th></tr></thead>
-            <tbody>
-                <tr><td>-</td><td>-</td><td>Pending data verification</td></tr>
-            </tbody>
+             <tbody>
+        <tr><td>AxisName</td><td>1</td><td>Axis Name</td></tr>
+        <tr><td>AxisIndex</td><td>2</td><td>Axis index</td></tr>
+        <tr><td>CurrPosition</td><td>3</td><td>Current position</td></tr>
+        <tr><td>CurrStatus</td><td>4</td><td>Axis status</td></tr>
+        <tr><td>CurrTorque</td><td>5</td><td>Current torque</td></tr>
+        <tr><td>CurrVelocity</td><td>6</td><td>Current velocity</td></tr>
+        <tr><td>CurrentInAmp</td><td>7</td><td>Motor current (A)</td></tr>
+        <tr><td>CurrAcceleration</td><td>8</td><td>Current acceleration</td></tr>
+        <tr><td>CurrDeceleration</td><td>9</td><td>Current deceleration</td></tr>
+        <tr><td>SoftLimitEnabled</td><td>10</td><td>Soft limit enabled flag</td></tr>
+        <tr><td>FwdSoftLimit</td><td>11</td><td>Forward soft limit</td></tr>
+        <tr><td>RevSoftLimit</td><td>12</td><td>Reverse soft limit</td></tr>
+        <tr><td>IsDualAxis</td><td>13</td><td>Whether dual-axis</td></tr>
+        <tr><td>NoOfDualAxis</td><td>14</td><td>Count of dual axes</td></tr>
+        <tr><td>DualAxis1</td><td>15</td><td>Dual axis 1</td></tr>
+        <tr><td>DualAxis2</td><td>16</td><td>Dual axis 2</td></tr>
+        <tr><td>DualAxis3</td><td>17</td><td>Dual axis 3</td></tr>
+        <tr><td>DualAxis4</td><td>18</td><td>Dual axis 4</td></tr>
+        <tr><td>DualAxis5</td><td>19</td><td>Dual axis 5</td></tr>
+        <tr><td>MinVelocity</td><td>20</td><td>Minimum velocity</td></tr>
+        <tr><td>MaxVelocity</td><td>21</td><td>Maximum velocity</td></tr>
+        <tr><td>MinAcc</td><td>22</td><td>Minimum acceleration</td></tr>
+        <tr><td>MaxAcc</td><td>23</td><td>Maximum acceleration</td></tr>
+        <tr><td>MinDec</td><td>24</td><td>Minimum deceleration</td></tr>
+        <tr><td>MaxDec</td><td>25</td><td>Maximum deceleration</td></tr>
+        <tr><td>JogHighVelocity</td><td>26</td><td>Jog high speed</td></tr>
+        <tr><td>JogMedVelocity</td><td>27</td><td>Jog medium speed</td></tr>
+        <tr><td>JogLowVelocity</td><td>28</td><td>Jog low speed</td></tr>
+        <tr><td>JogHighAcc</td><td>29</td><td>Jog high acceleration</td></tr>
+        <tr><td>JogMedAcc</td><td>30</td><td>Jog medium acceleration</td></tr>
+        <tr><td>JogLowAcc</td><td>31</td><td>Jog low acceleration</td></tr>
+        <tr><td>JogHighDec</td><td>32</td><td>Jog high deceleration</td></tr>
+        <tr><td>JogMedDec</td><td>33</td><td>Jog medium deceleration</td></tr>
+        <tr><td>JogLowDec</td><td>34</td><td>Jog low deceleration</td></tr>
+        <tr><td>NoOfErrorsPresent</td><td>40</td><td>Number of errors</td></tr>
+        <tr><td>ActiveError1</td><td>41</td><td>Error 1</td></tr>
+        <tr><td>ActiveError2</td><td>42</td><td>Error 2</td></tr>
+        <tr><td>ActiveError3</td><td>43</td><td>Error 3</td></tr>
+        <tr><td>ActiveError4</td><td>44</td><td>Error 4</td></tr>
+        <tr><td>ActiveError5</td><td>45</td><td>Error 5</td></tr>
+        <tr><td>ActualCurrent</td><td>110</td><td>Motor current</td></tr>
+        <tr><td>ActualTorque</td><td>111</td><td>Motor torque</td></tr>
+        <tr><td>ActualTemp</td><td>112</td><td>Motor temperature</td></tr>
+        <tr><td>ActualSpeedRPM</td><td>113</td><td>Motor speed in RPM</td></tr>
+    </tbody>
+        </table>
+
+    <h3 id="offset-robot">12. Robot Offset Address Map (Resource ID: 120)</h3>
+        
+       <table>
+            <thead><tr><th>Offset Name</th><th>Value</th><th>Description</th></tr></thead>
+              <tbody>
+        <tr><td>Robot model</td><td>1</td><td></td></tr>
+        <tr><td>IsAtHomePosition</td><td>2</td><td>Robot at home position</td></tr>
+        <tr><td>CurrentRobotPosPoint</td><td>3</td><td>Depends on project where is robot current position</td></tr>
+        <tr><td>Robot Operation state</td><td>4</td><td>Operation status</td></tr>
+        <tr><td>Robot Current state</td><td>5</td><td>Idle/Interrupted</td></tr>
+        <tr><td>Component Id selected on robot</td><td>6</td><td>Component id wrt that project.</td></tr>
+        <tr><td>Robot mode</td><td>7</td><td>Manual/Auto</td></tr>
+        <tr><td>Robot Joint1 pos</td><td>10</td><td></td></tr>
+        <tr><td>Robot Joint2 pos</td><td>11</td><td></td></tr>
+        <tr><td>Robot Joint3 pos</td><td>12</td><td></td></tr>
+        <tr><td>Robot Joint4 pos</td><td>13</td><td></td></tr>
+        <tr><td>Robot Joint5 pos</td><td>14</td><td></td></tr>
+        <tr><td>Robot Joint6 pos</td><td>15</td><td></td></tr>
+    </tbody>
         </table>
     </main>
 
