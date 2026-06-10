@@ -151,6 +151,9 @@
                 <li><a href="#offset-conveyor">16. Conveyor</a></li>
                 <li><a href="#offset-AutoCycle">17. AutoCycle</a></li>
                 <li><a href="#offset-Holders">18. Holders</a></li>
+                <li><a href="#offset-EventListeners">19. Event Listeners</a></li>
+                <li><a href="#offset-PositionCatchEventListeners">20. Position Catch Event Listeners</a></li>
+        
             </ul>
         </ul>
     </nav>
@@ -248,7 +251,9 @@
                 <tr><td>Tank</td><td>151</td><td>Tank-level parameters (levels, sensors, etc.)</td></tr>
                 <tr><td>Pressure</td><td>152</td><td>Pressure sensor or pressure system parameters</td></tr>
                 <tr><td>Valve</td><td>153</td><td>Valve control and status parameters</td></tr>
-                <tr><td>Flow</td><td>154</td><td>Flow sensor parameters</td></tr>
+                <tr><td>Flow</td><td>154</td><td>Flow sensor or flow system parameters</td></tr>
+                <tr><td>EventListeners</td><td>155</td><td>Event listener parameters</td></tr>
+                <tr><td>PositionCatchEventListeners</td><td>156</td><td>Position catch event listener parameters</td></tr>
                 <tr><td>LiftStation</td><td>200</td><td>Lift station–related parameters</td></tr>
                 <tr><td>CenterStation</td><td>201</td><td>Centering station parameters</td></tr>
                 <tr><td>Conveyor</td><td>202</td><td>Conveyor parameters</td></tr>
@@ -410,6 +415,38 @@
                 <tr><td>MinThreshold</td><td>4</td><td>Min flow threshold</td></tr>
             </tbody>
         </table>
+
+        <h3 id ="offset-EventListeners">11. Event Listeners Offset Address Map (Resource ID: 155)</h3>
+        <table>
+            <thead><tr><th>Offset Name</th><th>Value</th><th>Description</th></tr></thead>
+            <tbody>
+                <tr><td>ListenerID</td><td>1</td><td>Unique identifier for the event listener</td></tr>
+                <tr><td>EventType</td><td>2</td><td>Type of event being listened to (e.g., "AxisPosition", "EmergencyStop")</td></tr>
+                <tr><td>ResourceID</td><td>3</td><td>Associated resource ID for the event (e.g., Axis=100, Emergency=150)</td></tr>
+                <tr><td>SubResourceID</td><td>4</td><td>Associated sub-resource ID (e.g., specific axis index or emergency device index)</td></tr>
+                <tr><td>ConditionType</td><td>5</td><td>Type of condition to trigger on (e.g., "GreaterThan", "EqualTo")</td></tr>
+                <tr><td>ThresholdValue</td><td>6</td><td>Threshold value for triggering the event (e.g., position value, boolean state)</td></tr>
+                <tr><td>IsActive</td><td>7</td><td>Whether the event listener is currently active (2 for listening, 1 for event occurred, 0 for not listening)</td></tr>
+            </tbody>
+        </table>
+
+        <h1 id="offset-marker">12. Position Catch Event Listeners Offset Address Map (Resource ID: 156)</h3>
+        <table>
+            <thead><tr><th>Offset Name</th><th>Value</th><th>Description</th></tr></thead>
+            <tbody>
+                <tr><td>ListenerID</td><td>1</td><td>Unique identifier for the position catch event listener</td></tr>
+                <tr><td>ResourceID</td><td>2</td><td>Position of axis1 that is captured</td></tr>
+                <tr><td>SubResourceID</td><td>3</td><td>Position of axis2 that is captured (if applicable)</td></tr>
+                <tr><td>ResourceID</td><td>2</td><td>Position of axis3 that is captured</td></tr>
+                <tr><td>SubResourceID</td><td>3</td><td>Position of axis4 that is captured (if applicable)</td></tr>
+                <tr><td>ResourceID</td><td>2</td><td>Position of axis5 that is captured</td></tr>
+                <tr><td>SubResourceID</td><td>3</td><td>Position of axis6 that is captured (if applicable)</td></tr>
+                <tr><td>ResourceID</td><td>2</td><td>Position of axis7 that is captured</td></tr>
+                <tr><td>SubResourceID</td><td>3</td><td>Position of axis8 that is captured (if applicable)</td></tr>
+            
+            </tbody>
+
+
 
         <h3 id="offset-cylinder">11. Cylinder Offset Address Map (Resource ID: 123)</h3>
         <table>
