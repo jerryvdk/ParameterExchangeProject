@@ -153,6 +153,7 @@
                 <li><a href="#offset-Holders">18. Holders</a></li>
                 <li><a href="#offset-EventListeners">19. Event Listeners</a></li>
                 <li><a href="#offset-PositionCatchEventListeners">20. Position Catch Event Listeners</a></li>
+                <li><a href="#offset-PatternFollower">21. Pattern Follower</a></li>
         
             </ul>
         </ul>
@@ -254,6 +255,7 @@
                 <tr><td>Flow</td><td>154</td><td>Flow sensor or flow system parameters</td></tr>
                 <tr><td>EventListeners</td><td>155</td><td>Event listener parameters</td></tr>
                 <tr><td>PositionCatchEventListeners</td><td>156</td><td>Position catch event listener parameters</td></tr>
+                <tr><td>PatternFollower</td><td>157</td><td>Pattern follower parameters</td></tr>
                 <tr><td>LiftStation</td><td>200</td><td>Lift station–related parameters</td></tr>
                 <tr><td>CenterStation</td><td>201</td><td>Centering station parameters</td></tr>
                 <tr><td>Conveyor</td><td>202</td><td>Conveyor parameters</td></tr>
@@ -510,6 +512,7 @@
         <tr><td>ActualTemp</td><td>112</td><td>Motor temperature</td></tr>
         <tr><td>ActualSpeedRPM</td><td>113</td><td>Motor speed in RPM</td></tr>
         <tr><td>DC Bus voltage</td><td>114</td><td>DC Bus voltage</td></tr>
+        <tr><td>Drive temperature</td><td>115</td><td>Drive temperature</td></tr>
     </tbody>
         </table>
 
@@ -542,8 +545,9 @@
         <tr><td>Notification id/Resource</td><td>1</td><td></td></tr>
         <tr><td>Identification number</td><td>2</td><td></td></tr>
         <tr><td>Notification severity</td><td>3</td><td></td></tr>
-        <tr><td>Timestamp</td><td>4</td><td></td></tr>
-        <tr><td>Message</td><td></td><td></td></tr>
+        <tr><td>Timestamp low</td><td>4</td><td>low part of timestamp</td></tr>
+        <tr><td>Timestamp high</td><td>5</td><td>high part of timestamp</td></tr>
+        <tr><td>Message</td><td>6</td><td></td></tr>
     </tbody>
         </table>
 
@@ -619,6 +623,22 @@
 
     </tbody>
         </table>
+
+        <h3 id="offset-PatternFollower">16. Pattern Follower Offset Address Map (Resource ID: 157)</h3>
+
+       <table>
+            <thead><tr><th>Offset Name</th><th>Value</th><th>Description</th></tr></thead>
+              <tbody>
+        <tr><td>Follower type</td><td>1</td><td>Pattern follower type(Profile sensor/Camera)</td></tr>
+        <tr><td>Follower enabled</td><td>2</td><td>Pattern follower enabled</td></tr>
+        <tr><td>Pattern follow reference value</td><td>3</td><td>Pattern follower reference value</td></tr>
+        <tr><td>Pattern follow current value</td><td>4</td><td>Pattern follower current value</td></tr>
+        <tr><td>Pattern follow tolerance value</td><td>5</td><td>Pattern follower tolerance</td></tr>
+        <tr><td>Pattern follow encoder ref position</td><td>6</td><td>Pattern follower encoder/ref position/</td></tr>
+        <tr><td>Pattern follow In tolerance</td><td>7</td><td>Pattern follower in tolerance</td></tr>
+    </tbody>
+        </table>
+
     </main>
 
 </body>
