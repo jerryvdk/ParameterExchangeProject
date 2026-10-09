@@ -156,6 +156,9 @@
                 <li><a href="#offset-PatternFollower">21. Pattern Follower</a></li>
         
             </ul>
+            <li style="margin-top: 15px; font-weight: bold;">
+                <a href="#notification-scheme" style="color: var(--primary-color);">Notification scheme from PLC to PC</a>
+            </li>
         </ul>
     </nav>
 
@@ -542,12 +545,13 @@
        <table>
             <thead><tr><th>Offset Name</th><th>Value</th><th>Description</th></tr></thead>
               <tbody>
-        <tr><td>Notification id/Resource</td><td>1</td><td></td></tr>
-        <tr><td>Identification number</td><td>2</td><td></td></tr>
-        <tr><td>Notification severity</td><td>3</td><td></td></tr>
-        <tr><td>Timestamp low</td><td>4</td><td>low part of timestamp</td></tr>
-        <tr><td>Timestamp high</td><td>5</td><td>high part of timestamp</td></tr>
-        <tr><td>Message</td><td>6</td><td></td></tr>
+        <tr><td>Notification id/Resource</td><td>1</td><td>Combined (ResourceId &lt;&lt; 16) | SubResourceId targeting component &amp; instance index</td></tr>
+        <tr><td>Identification number</td><td>2</td><td>Unique application-defined event/alarm identification number</td></tr>
+        <tr><td>Notification severity</td><td>3</td><td>Severity level: 1 = Info, 2 = Warning, 3 = Error, 4 = Critical</td></tr>
+        <tr><td>Timestamp low</td><td>4</td><td>low part of timestamp (lower 32-bit word)</td></tr>
+        <tr><td>Timestamp high</td><td>5</td><td>high part of timestamp (upper 32-bit word)</td></tr>
+        <tr><td>Message</td><td>6</td><td>Contextual error data or raw NC drive fault code</td></tr>
+        <tr><td>SequenceNo</td><td>7</td><td>Rolling incrementing counter to detect dropped/missed log frames</td></tr>
     </tbody>
         </table>
 
@@ -639,6 +643,109 @@
     </tbody>
         </table>
 
+        <!-- ==================================================== -->
+        <!-- SECTION 2: Notification scheme from PLC to PC        -->
+        <!-- ==================================================== -->
+        <h1 id="notification-scheme">Notification Scheme from PLC to PC</h1>
+
+        <p>This section details the message layout and event logging mechanism implemented to transmit notifications, alarms, and diagnostic events from the PLC controller to the PC software.</p>
+
+        <h2>Notification Structure Overview</h2>
+        <p>Every notification produced by the PLC follows the exact offset address map defined for Resource ID 253 (Notification). The offset numbers and fields are structured as follows:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Offset</th>
+                    <th>Offset Name</th>
+                    <th>Data Type</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>1</strong></td>
+                    <td><strong>Notification id / Resource</strong></td>
+                    <td>DWORD (32-bit)</td>
+                    <td>Combined Packed Resource Key <code>(ResourceId &lt;&lt; 16) | SubResourceId</code> targeting the exact origin component and instance index.</td>
+                </tr>
+                <tr>
+                    <td><strong>2</strong></td>
+                    <td><strong>Identification number</strong></td>
+                    <td>DWORD (32-bit)</td>
+                    <td>Unique application-defined event or alarm identification number. Used by the PC software to look up detailed descriptions.</td>
+                </tr>
+                <tr>
+                    <td><strong>3</strong></td>
+                    <td><strong>Notification severity</strong></td>
+                    <td>UINT16 / DWORD</td>
+                    <td>Severity classification level: <code>1</code> = Info, <code>2</code> = Warning, <code>3</code> = Error, <code>4</code> = Critical / E-Stop.</td>
+                </tr>
+                <tr>
+                    <td><strong>4</strong></td>
+                    <td><strong>Timestamp low</strong></td>
+                    <td>DWORD (32-bit)</td>
+                    <td>Lower 32 bits of the 64-bit PLC system timestamp (milliseconds/microseconds).</td>
+                </tr>
+                <tr>
+                    <td><strong>5</strong></td>
+                    <td><strong>Timestamp high</strong></td>
+                    <td>DWORD (32-bit)</td>
+                    <td>Upper 32 bits of the 64-bit PLC system timestamp.</td>
+                </tr>
+                <tr>
+                    <td><strong>6</strong></td>
+                    <td><strong>Message</strong></td>
+                    <td>DWORD (32-bit)</td>
+                    <td>Contextual error or diagnostic parameter (e.g., NC drive fault code, raw sensor value, or position offset).</td>
+                </tr>
+                <tr>
+                    <td><strong>7</strong></td>
+                    <td><strong>SequenceNo</strong></td>
+                    <td>DWORD (32-bit)</td>
+                    <td>Rolling incrementing counter (1, 2, 3...) assigned by PLC to ensure no log frames are dropped or missed by the PC.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Severity Level Definitions</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Severity Value</th>
+                    <th>Level</th>
+                    <th>Description &amp; UI Behavior</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>1</strong></td>
+                    <td>Info</td>
+                    <td>Informational event (e.g., Auto cycle started, homing complete). Logged silently to file/database.</td>
+                </tr>
+                <tr>
+                    <td><strong>2</strong></td>
+                    <td>Warning</td>
+                    <td>Operational warning (e.g., Water tank low level threshold reached). Displayed as yellow notice.</td>
+                </tr>
+                <tr>
+                    <td><strong>3</strong></td>
+                    <td>Error</td>
+                    <td>Functional component error (e.g., Axis position lag limit exceeded). Highlighted red in log viewer.</td>
+                </tr>
+                <tr>
+                    <td><strong>4</strong></td>
+                    <td>Critical</td>
+                    <td>System-wide fault (e.g., Emergency stop pressed, safety curtain tripped). Triggers modal alarm banner.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Packed Resource Key Encoding Example</h3>
+        <p>Offset 1 (<code>Notification id/Resource</code>) packs the Resource ID and Sub-resource instance index into a single 32-bit key as follows:</p>
+        <pre>PackedResourceKey = (ResourceId &lt;&lt; 16) | SubResourceId</pre>
+        <p>For example, if Axis instance index <code>4</code> (Resource ID <code>100</code>) experiences a drive fault:</p>
+        <pre>PackedResourceKey = (100 &lt;&lt; 16) | 4  // Resulting Key = 0x00640004</pre>
     </main>
 
 </body>
